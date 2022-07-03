@@ -1,9 +1,8 @@
-﻿#ifndef WIDGET_H
+#ifndef WIDGET_H
 #define WIDGET_H
 
 #include <QWidget>
-#include <QTcpSocket>
-#include <QTcpServer>
+#include <QAxObject>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,27 +16,30 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    void insert_table();
+    void calculate_result();
+
 private slots:
-    void on_start_recv_clicked();
 
-    void on_connect_recv_clicked();
 
-    void on_choose_file_clicked();
-
-    void on_send_file_clicked();
-
-signals:
-
-    void recv_conn(QTcpSocket * m_tcp);
-    void sendfile(QString path);
-    void conn_server(QString ip, unsigned short port);
+    void on_save_file1_clicked();
 
 private:
     Ui::Widget *ui;
-    QTcpSocket * m_tcp;
-    QTcpServer * m_server;
-    QThread * server_thread;
-    QThread * client_thread;
+
+    //时
+    int allsecond;
+
+    //缺勤时间
+    double queqintime = 0;
+    //加班时间
+    double jiabantime = 0;
+    //迟到次数
+    int chidaotime = 0;
+    //早退次数
+    int zaotuitime = 0;
+     QString filepath;
+
 
 };
 #endif // WIDGET_H
